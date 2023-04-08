@@ -1,7 +1,6 @@
-class Lightning {
+class Lightning extends LivingCreature{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.directions = [];
 
     }
@@ -11,21 +10,31 @@ class Lightning {
         ];
     }
 
-    chooseCell() {
-        this.getNewCoordinates()
-        var found = [];
+    chooseCell(char,char1) {
+        this.getNewCoordinates();
+        var found = []
         for (var i in this.directions) {
             var x = this.directions[i][0];
             var y = this.directions[i][1];
             if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                found.push(this.directions[i]);
+                if (matrix[y][x] == char) {
+                    found.push(this.directions[i]);
+                }
             }
 
+            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
+                if (matrix[y][x] == char1) {
+                    found.push(this.directions[i]);
+                }
+            }
+            
         }
         return found;
     }
+
+    
     eat() {
-        let emptyCelss = this.chooseCell()
+        let emptyCelss = this.chooseCell(1,2)
         let newCell = random(emptyCelss)
         if (newCell) {
             let newX = newCell[0]

@@ -57,7 +57,7 @@ function generateMatrix(matrLeng, gr, grEat, pred, hunt, wat, lig, add) {
         }
 
     }
-    for (let i = 0; i < wat; i++) {
+    for (let i = 0; i < add; i++) {
         let x = Math.floor(Math.random() * matrLeng)
         let y = Math.floor(Math.random() * matrLeng)
         if (matrix[y][x] == 0) {
