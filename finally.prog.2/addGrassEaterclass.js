@@ -1,4 +1,6 @@
-class AddGrassEater extends LivingCreature{
+let LivingCreature = require("./LivingCreature");
+
+module.export = class AddGrassEater extends LivingCreature{
     constructor(x, y) {
         super(x, y);
         this.directions = [];
