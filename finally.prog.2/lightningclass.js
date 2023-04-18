@@ -37,7 +37,7 @@ module.export = class Lightning extends LivingCreature{
     
     eat() {
         let emptyCelss = this.chooseCell(1,2)
-        let newCell = random(emptyCelss)
+        let newCell = emptyCelss[Math.floor(Math.random() * emptyCelss.length)];
         if (newCell) {
             let newX = newCell[0]
             let newY = newCell[1]
@@ -90,7 +90,7 @@ module.export = class Lightning extends LivingCreature{
     }
     move() {
         let emptyCelss = this.chooseCell(0)
-        let newCell = random(emptyCelss)
+        let newCell = emptyCelss[Math.floor(Math.random() * emptyCelss.length)];
         if (newCell) {
             let newX = newCell[0]
             let newY = newCell[1]
