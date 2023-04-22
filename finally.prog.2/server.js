@@ -6,11 +6,11 @@ var fs = require('fs');
 
 app.use(express.static("."));
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.redirect('index.html');
 });
 
-server.listen(3000, function(){
+server.listen(3000, function () {
     console.log('server is run');
 })
 //matrix generator
@@ -108,7 +108,7 @@ AddGrassEater = require("./addGrassEaterclass");
 
 //object generation
 
-function greatObject(){
+function createObject() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
@@ -130,11 +130,45 @@ function greatObject(){
                 let gr = new Lightning(x, y)
                 lightningArr.push(gr)
             } else if (matrix[y][x] == 7) {
-                let gr = new AddGrassEater(x, y)
+                let gr = new AddGrassEater(x,y)
                 addGrassEaterArr.push(gr)
             }
         }
     }
+    io.sockets.emit("Send matrix", matrix);
 }
 
-io.sockets.emit("Send matrix", matrix);
+
+function game() {
+    for (let i = 0; i < grassArr.length; i++) {
+        grassArr[i].mul()
+    }
+
+    for (let i = 0; i < grassEaterArr.length; i++) {
+        grassEaterArr[i].eat()
+    }
+    for (let i = 0; i < predatorArr.length; i++) {
+        predatorArr[i].eat()
+    }
+    for (let i = 0; i < hunterArr.length; i++) {
+        hunterArr[i].eat()
+    }
+    for (let i = 0; i < waterArr.length; i++) {
+        waterArr[i].giveEnergy()
+    }
+    for (let i = 0; i < lightningArr.length; i++) {
+        lightningArr[i].eat()
+    }
+    for (let i = 0; i < addGrassEaterArr.length; i++) {
+        addGrassEaterArr[i].move()
+        addGrassEaterArr[i].create()
+    }
+
+    io.sockets.emit("Send matrix", matrix);
+}
+
+setInterval(game, 300);
+
+io.on('connection', function(){
+    createObject()
+})

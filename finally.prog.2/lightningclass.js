@@ -1,6 +1,6 @@
 let LivingCreature = require("./LivingCreature");
 
-module.export = class Lightning extends LivingCreature{
+module.exports = class Lightning extends LivingCreature{
     constructor(x, y) {
         super(x, y);
         this.directions = [];

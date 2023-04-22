@@ -1,5 +1,5 @@
 let LivingCreature = require("./LivingCreature");
-module.export = class AddGrassEater extends LivingCreature{
+module.exports = class AddGrassEater extends LivingCreature{
     constructor(x, y) {
         super(x, y);
         this.directions = [];
@@ -25,7 +25,7 @@ module.export = class AddGrassEater extends LivingCreature{
 
     move() {
         let emptyCelss = this.chooseCell(0)
-        let newCell = random(emptyCelss)
+        let newCell = emptyCelss[Math.floor(Math.random() * emptyCelss.length)];
         if (newCell) {
             let newX = newCell[0]
             let newY = newCell[1]
@@ -40,7 +40,7 @@ module.export = class AddGrassEater extends LivingCreature{
     }
     create() {
         let emptyCelss = this.chooseCell(0)
-        let newCell = random(emptyCelss)
+        let newCell = emptyCelss[Math.floor(Math.random() * emptyCelss.length)];
         if (newCell) {
             this.energy++
             let newX = newCell[0]

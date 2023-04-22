@@ -1,6 +1,6 @@
 let LivingCreature = require("./LivingCreature");
 
-module.export = class GrassEater extends LivingCreature{
+module.exports = class GrassEater extends LivingCreature{
     constructor(x, y) {
         super(x, y);
         this.energy = 10;
@@ -22,7 +22,7 @@ module.export = class GrassEater extends LivingCreature{
 
     chooseCell(character) {
         this.getNewCoordinates()
-        return super.chooseCell(char);
+        return super.chooseCell(character);
     }
 
     mul() {

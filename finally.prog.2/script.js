@@ -1,16 +1,13 @@
-
+var socket = io();
 var side = 15;
 
 
 function setup() {
     createCanvas(50 * side, 50 * side);
     background('#acacac');
-
-    
-
 }
 
-function draw() {
+function changeColor(matrix) {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
@@ -34,27 +31,7 @@ function draw() {
             rect(x * side, y * side, side, side);
         }
     }
-    for (let i = 0; i < grassArr.length; i++) {
-        grassArr[i].mul()
-    }
 
-    for (let i = 0; i < grassEaterArr.length; i++) {
-        grassEaterArr[i].eat()
-    }
-    for (let i = 0; i < predatorArr.length; i++) {
-        predatorArr[i].eat()
-    }
-    for (let i = 0; i < hunterArr.length; i++) {
-        hunterArr[i].eat()
-    }
-    for (let i = 0; i < waterArr.length; i++) {
-        waterArr[i].giveEnergy()
-    }
-    for (let i = 0; i < lightningArr.length; i++) {
-        lightningArr[i].eat()
-    }
-    for (let i = 0; i < addGrassEaterArr.length; i++) {
-        addGrassEaterArr[i].move()
-        addGrassEaterArr[i].create()
-    }
 }
+
+socket.on("Send matrix", changeColor);
