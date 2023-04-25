@@ -83,7 +83,7 @@ function generateMatrix(matrLeng, gr, grEat, pred, hunt, wat, lig, add) {
     }
     return matrix
 }
-matrix = generateMatrix(50, 18, 10, 10, 8, 5, 5, 4);
+matrix = generateMatrix(45, 18, 10, 10, 8, 5, 4, 4);
 
 io.sockets.emit("Send matrix", matrix);
 
@@ -143,7 +143,6 @@ function game() {
     for (let i = 0; i < grassArr.length; i++) {
         grassArr[i].mul()
     }
-
     for (let i = 0; i < grassEaterArr.length; i++) {
         grassEaterArr[i].eat()
     }
@@ -168,6 +167,17 @@ function game() {
 }
 
 setInterval(game, 300);
+
+// var statistics = {};
+// setInterval(function(){
+//     statistics.grass = grassArr.length;
+//     statistics.grassEater = grassEaterArr.length;
+//     statistics.predator = predatorArr.length;
+//     statistics.hunter = hunterArr.length;
+//     statistics.water = waterArr.length;
+//     statistics.lightning = lightningArr.length;
+//     statistics.addGrassEater = addGrassEaterArr.length;
+// })
 
 io.on('connection', function(){
     createObject()

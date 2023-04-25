@@ -3,7 +3,7 @@ var side = 15;
 
 
 function setup() {
-    createCanvas(50 * side, 50 * side);
+    createCanvas(45 * side, 45 * side);
     background('#acacac');
 }
 
