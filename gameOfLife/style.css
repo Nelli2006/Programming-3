@@ -8,6 +8,7 @@ body{
 
 #header{
     color: #fff;
+    margin:auto;
 }
 
 .bigDiv{
@@ -35,10 +36,10 @@ body{
 }
 
 #spring{
-    background-color: #90EE90;   
+    background-color: #2E8B57;   
     width: 120px;
     height: 30px;
-    border: 2px solid #90EE90;
+    border: 2px solid #2E8B57;
     border-radius: 15px;
     margin-right: 5px;
 }
@@ -64,16 +65,127 @@ body{
 
 #winter:hover{
     background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
 }
 
 #spring:hover{
     background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
 }
 
 #summer:hover{
     background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
 }
 
 #autumn:hover{
     background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+.divik2{
+    display: flex;
+    flex-direction: row;
+}
+
+#header3{
+    color: #fff;
+}
+
+#grass{
+    background-color: #177917;
+    width: 120px;
+    height: 30px;
+    border: 2px solid #177917;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#grassEater{
+    background-color: yellow;
+    width: 120px;
+    height: 30px;
+    border: 2px solid yellow;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#predator{
+    background-color: red;
+    width: 120px;
+    height: 30px;
+    border: 2px solid red;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#hunter{
+    background-color: #90EE90;
+    width: 120px;
+    height: 30px;
+    border: 2px solid #90EE90;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#water{
+    background-color: blue;
+    width: 120px;
+    height: 30px;
+    border: 2px solid blue;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#lightning{
+    background-color: orange;
+    width: 120px;
+    height: 30px;
+    border: 2px solid orange;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#killAll{
+    background-color: #954535;
+    width: 120px;
+    height: 30px;
+    border: 2px solid #954535;
+    border-radius: 15px;
+    margin-right: 5px;
+}
+
+#grass:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+#grassEater:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+#predator:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+#hunter:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+#water:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+#lightning:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
+}
+
+#killAll:hover{
+    background-color: #fff;
+    transform: scale(1.5) rotate(-10deg);
 }

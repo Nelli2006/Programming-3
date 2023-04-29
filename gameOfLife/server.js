@@ -3,7 +3,6 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs');
-
 app.use(express.static("."));
 
 app.get('/', function (req, res) {
@@ -20,7 +19,6 @@ function generateMatrix(matrLeng, gr, grEat, pred, hunt, wat, lig, add) {
         matrix.push([]);
         for (let j = 0; j < matrLeng; j++) {
             matrix[i].push(0);
-
         }
 
     }
@@ -168,17 +166,148 @@ function game() {
 
 setInterval(game, 300);
 
-// var statistics = {};
-// setInterval(function(){
-//     statistics.grass = grassArr.length;
-//     statistics.grassEater = grassEaterArr.length;
-//     statistics.predator = predatorArr.length;
-//     statistics.hunter = hunterArr.length;
-//     statistics.water = waterArr.length;
-//     statistics.lightning = lightningArr.length;
-//     statistics.addGrassEater = addGrassEaterArr.length;
-// })
+function KillAll(){
+    grassArr = [];
+    grassEaterArr = [];
+    predatorArr = [];
+    hunterArr = [];
+    waterArr = [];
+    lightningArr = [];
+    for(var y = 0; y < matrix.length; y++){
+        for(var x = 0; x < matrix[y].length; x++){
+            matrix[y][x] = 0;
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
 
-io.on('connection', function(){
-    createObject()
+function AddGrass(){
+    for(var i = 0; i < 25; i++){
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if(matrix[y][x]){
+            matrix[y][x] = 1;
+            var gr = new Grass(x, y);
+            grassArr.push(gr);
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
+
+function AddGrasseater(){
+    for(var i = 0; i < 25; i++){
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if(matrix[y][x]){
+            matrix[y][x] = 2;
+            var grEat = new GrassEater(x, y);
+            grassEaterArr.push(grEat);
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
+
+function AddPredator(){
+    for(var i = 0; i < 15; i++){
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if(matrix[y][x]){
+            matrix[y][x] = 3;
+            var pred = new Predator(x, y);
+            predatorArr.push(pred);
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
+
+function AddHunter(){
+    for(var i = 0; i < 15; i++){
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if(matrix[y][x]){
+            matrix[y][x] = 4;
+            var hunt = new Hunter(x, y);
+            hunterArr.push(hunt);
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
+
+function AddWater(){
+    for(var i = 0; i < 7; i++){
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if(matrix[y][x]){
+            matrix[y][x] = 5;
+            var wat = new Water(x, y);
+            waterArr.push(wat);
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
+
+function AddLightning(){
+    for(var i = 0; i < 7; i++){
+        var x = Math.floor(Math.random() * matrix[0].length);
+        var y = Math.floor(Math.random() * matrix.length);
+        if(matrix[y][x]){
+            matrix[y][x] = 6;
+            var lig = new Lightning(x, y);
+            lightningArr.push(lig);
+        }
+    }
+    io.sockets.emit("Send matrix", matrix);
+}
+
+ weather = "winter";
+
+function Winter(){
+    weather = 'winter';
+    io.sockets.emit('Winter', weather);
+}
+
+function Spring(){
+    weather = 'spring';
+    io.sockets.emit('Spring', weather);
+}
+
+function Summer(){
+    weather = 'summer';
+    io.sockets.emit('Summer', weather);
+}
+
+function Autumn(){
+    weather = 'autumn';
+    io.sockets.emit('Autumn', weather);
+}
+
+
+io.on('connection', function(socket){
+    createObject();
+    socket.on("addGrass", AddGrass);
+    socket.on("addGrasseater", AddGrasseater);
+    socket.on("addPredator", AddPredator);
+    socket.on("addHunter", AddHunter);
+    socket.on("addWater", AddWater);
+    socket.on("addLightning", AddLightning);
+    socket.on("killAll", KillAll);
+    socket.on("winter", Winter);
+    socket.on("spring", Spring);
+    socket.on("summer", Summer);
+    socket.on("autumn", Autumn);
 })
+
+var statistics = {};
+setInterval(function(){
+    statistics.grass = grassArr.length;
+    statistics.grassEater = grassEaterArr.length;
+    statistics.predator = predatorArr.length;
+    statistics.hunter = hunterArr.length;
+    statistics.water = waterArr.length;
+    statistics.lightning = lightningArr.length;
+    statistics.addGrassEater = addGrassEaterArr.length;
+
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function(){
+        console.log("statistics");
+    })
+}, 1000)
